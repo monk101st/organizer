@@ -1,0 +1,15 @@
+extends layout
+
+block content
+  div(class='login-bar')
+    h1(class='p-5')= title
+    p(class='px-5') Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias tempora delectus dolores hic beatae adipisci molestiae architecto dicta ullam voluptatem.
+    form(method="post" class='row g-3')
+        div(class='col-md-6 p-5')
+            label(class='form-label text-light') Email:
+            input(type='email' class='form-control' name='login' placeholder='wpisz adres email...')
+        div(class='col-md-6 p-5')
+            label(class='form-label text-light') Password:
+            input(type='password' class='form-control' name='password' placeholder='wpisz hasło...')
+        div(class='col-12 px-5 text-end')
+            button(class='btn btn-primary px-5' type='submit') Zaloguj

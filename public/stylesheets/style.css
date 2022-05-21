@@ -107,3 +107,18 @@ body {
   padding: 10px 5px;
   background-color: aliceblue;
 }
+
+/* LOGIN */
+
+.login-bar h1 {
+  color: #00B7FF;
+}
+
+.login-bar p {
+  color: #dfe9ec;
+  font-size: 1.4rem;
+}
+
+.login-bar form {
+  font-size: 1.4rem;
+}

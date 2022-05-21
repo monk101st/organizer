@@ -5,7 +5,11 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var aboutRouter = require('./routes/about');
+var newsRouter = require('./routes/news');
+var projectsRouter = require('./routes/projects');
+var quizRouter = require('./routes/quiz');
+var adminRouter = require('./routes/admin');
 
 var app = express();
 
@@ -19,8 +23,18 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use((req, res, next) => {
+  res.locals.path = req.path; //podstawienie pod zmienną globalną adresu strony linku 
+
+  next();
+})
+
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/about', aboutRouter);
+app.use('/news', newsRouter);
+app.use('/projects', projectsRouter);
+app.use('/quiz', quizRouter);
+app.use('/admin', adminRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

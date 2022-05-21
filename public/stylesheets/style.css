@@ -1,8 +1,109 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body{
+  background-color: #12192e;
+}
+
+/* KLASY GLOBALNE */
+.menuItem {
+  font-size: 1rem;
+  text-transform: uppercase;
+  color: #00B7FF;
+}
+.menuActive {
+  color: red;
+}
+
+.nav-link:hover {
+  color: yellow;
+}
 body {
-  padding: 50px;
+  height: 100vh;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
-a {
-  color: #00B7FF;
+
+/* KARUZELA */
+
+.carousel-item {
+  position: relative;
+  height: calc(100vh - 77.6px);
+  background-position: center;
+  background-size: cover;
+  z-index: 0;
+}
+.carousel-img-one {
+  background-image: url('/images/carousel_1_bw.jpg');
+
+}
+.carousel-img-two {
+  background-image: url('/images/carousel_2_bw.jpg');
+
+}
+.carousel-img-three {
+  background-image: url('/images/carousel_3_bw.jpg');
+
+}
+.carousel-inner .btn {
+  font-size: 2rem;
+  padding: 5px 15px;
+}
+
+/* NEWS */
+
+.news-bar {
+  width: 100%;
+  height: calc(100vh - 77.6px);
+}
+
+/* ABOUT */
+
+.about-bar {
+  width: 100%;
+  height: calc(100vh - 77.6px);
+}
+
+.about-column .about-card-img{
+  border: 2px solid aliceblue;
+}
+
+.about-card {
+  background-color: aliceblue;
+}
+.about-card-img {
+  position: relative;
+  width: 100%;
+  height: 150px;
+}
+.about-card-img img {
+  width: 100%;
+  height: 150px;
+}
+
+.about-card-img h3 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 150px;
+  font-size: 2rem;
+  padding: 10px 30px;
+  color: rgb(10, 230, 246);
+  text-shadow: 2px 2px 8px rgb(91, 244, 244);
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.about-card-img h3:hover{
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.about-column p {
+  font-size: 1.4rem;
+  text-align: justify;
+  padding: 10px 5px;
+  background-color: aliceblue;
 }

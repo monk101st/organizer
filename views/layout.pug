@@ -1,7 +1,27 @@
 doctype html
+
+mixin menuItem(title, url) 
+    a(href=url class=`nav-link px-lg-3 menuItem ${path == url ? 'menuActive' : ''}`)=title
+
 html
   head
     title= title
+    link(href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous") 
     link(rel='stylesheet', href='/stylesheets/style.css')
+
   body
+    nav(class="navbar navbar-expand-lg navbar-dark bg-dark p-4 fixed-top sticky-top")
+      a(class="navbar-brand p-3" href="/") Artprotect
+      button(class="navbar-toggler mb-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation")
+        span(class="navbar-toggler-icon")
+      div(class="collapse navbar-collapse" id="navbarNavAltMarkup")
+        div(class="navbar-nav text-uppercase ms-auto")
+        +menuItem('Start', '/')
+        +menuItem('About', '/about')
+        +menuItem('News', '/news')
+        +menuItem('Projects', '/projects')
+        +menuItem('Quiz', '/quiz')
+        +menuItem('Admin', '/admin')
     block content
+
+    script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous")

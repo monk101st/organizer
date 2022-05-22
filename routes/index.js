@@ -19,7 +19,13 @@ router.post('/login', (req, res, next) => {
   const body = req.body;
 
   if(body.login === login && body.password === password) {
-    req.session.admin = 1;
+    req.session.admin = {
+      sesStatus: 1,
+      sesName: 'Maciej',
+      sesSurname: 'Jaszczuk'
+    }
+
+
 
     res.redirect('/admin');
   }else {

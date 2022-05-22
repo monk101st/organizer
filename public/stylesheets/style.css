@@ -12,7 +12,7 @@ body{
 .menuItem {
   font-size: 1rem;
   text-transform: uppercase;
-  color: #00B7FF;
+  color: #0ca6e8;
 }
 .menuActive {
   color: red;
@@ -121,4 +121,70 @@ body {
 
 .login-bar form {
   font-size: 1.4rem;
+}
+
+
+/* ADMIN INDEX */
+
+.admin-index-bar  {
+  position: relative;
+  color: #00B7FF;
+}
+
+.admin-index-bar .menu-column {
+  height: calc(100vh - 77.6px);
+}
+
+.user-info-bar {
+  text-align: center;
+}
+
+.user-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid white;
+  margin-left: 10px;
+}
+
+.buttons-bar .btn {
+  background-color: #12192e;
+}
+
+.title-admin-page {
+  width: 100%;
+  padding: 10px;
+  text-align: right;
+}
+
+.add-buttons-bar {
+  text-align: center;
+}
+
+.add-buttons-bar .btn a {
+  text-decoration: none;
+}
+.list-bar {
+  margin-top: 10px;
+  width: 100%;
+  height: calc(100vh - 240px);
+  background-color: #dfe9ec;
+  overflow-y: auto;
+}
+
+
+/* NEWS - FORM */
+
+.news-form-bar h1 {
+  color: #00B7FF;
+}
+
+.news-form-bar .validation-alert {
+  color: red;
+}
+
+.news-form-bar form{
+  text-align: right;
+  font-size: 1.4rem;
+  color: aliceblue;
 }

@@ -5,6 +5,15 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var config = require('./routes/config');
+var mongoose = require('mongoose');
+
+mongoose.connect(config.db, {useNewUrlParser: true});
+
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error'));
+db.once('open', function() {
+  console.log('connected...')
+})
 
 
 var indexRouter = require('./routes/index');
@@ -13,6 +22,7 @@ var newsRouter = require('./routes/news');
 var projectsRouter = require('./routes/projects');
 var quizRouter = require('./routes/quiz');
 var adminRouter = require('./routes/admin');
+
 
 var app = express();
 
@@ -44,6 +54,10 @@ app.use('/news', newsRouter);
 app.use('/projects', projectsRouter);
 app.use('/quiz', quizRouter);
 app.use('/admin', adminRouter);
+
+
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

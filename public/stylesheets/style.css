@@ -168,8 +168,16 @@ body {
   margin-top: 10px;
   width: 100%;
   height: calc(100vh - 240px);
-  background-color: #dfe9ec;
+  background-color: #7dd6f1;
   overflow-y: auto;
+}
+
+.table .table-body {
+  overflow-y: auto;
+}
+
+.action-btn {
+  padding: 1px 5px;
 }
 
 

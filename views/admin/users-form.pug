@@ -25,14 +25,23 @@ block content
           each message in errors.errors 
               p(class='validation-alert')=message
               
-      form(method='post')
-          div(class='mb-3')
-              label(class='form-label mx-2') Tytuł:
-              input(type='text' name='title' class='form-control' value=body.title || '' )
-          div(class='mb-3')
-              label(class='form-label mx-2') Autor:
-              input(type='text' name='author' class='form-control' value=body.author || '' )
-          div(class='mb-3')
-              label(class='form-label mx-2') Treść:
-              textarea(class='form-control' type='text' name='description' rows='5')=body.description || ''
-          button(type='submit' class='btn btn-primary') Dodaj
+      form( method='post')
+        div(class='mb-3')
+          label(class='form-label mx-2') Nick - Nazwa użytkownika:
+          input(type='text' name='nick' class='form-control' value=body.nick || '' )
+        div(class='mb-3')
+          label(class='form-label mx-2') Imię:
+          input(type='text' name='name' class='form-control' value=body.name || '' )
+        div(class='mb-3')
+          label(class='form-label mx-2') Nazwisko:
+          input(type='text' name='surname' class='form-control' value=body.surname || '' )
+        div(class='mb-3')
+          label(class='form-label mx-2') Email:
+          input(type='email' name='email' class='form-control' value=body.surname || '' )
+        div(class='mb-3')
+          label(class='form-label mx-2') Password:
+          input(type='password' name='password' class='form-control' value=body.surname || '' )
+        div(class='mb-3')
+          label(class='form-label mx-2') Avatar:
+          input(type='text' name='avatar' class='form-control' value=body.surname || '' )
+        button(type='submit' class='btn btn-primary') Dodaj

@@ -5,7 +5,7 @@ block content
     div(class='menu-column col-2 py-3')
       div(class='user-info-bar') 
         p(class='username-bar') #{userName} #{userSurname}
-          img(src="/images/avatars/monk101st.jpg", alt="" class='user-avatar')
+          img(src=`/images/avatars/${userAvatar}.jpg`, alt="" class='user-avatar')
       div(class='buttons-bar p-3')
         button(class='btn btn-primary w-100 my-1')
           +menuItem('About', '/admin/about-list')
@@ -23,7 +23,32 @@ block content
         h3(class='title-admin-page') #{title}
         div(class='add-buttons-bar')
             button(class='btn btn-dark mx-1')
-                a(href="/admin/news/add") Dodaj
-            button(class='btn btn-dark mx-1')
-                a(href="/news") Podgląd
+                a(href="/admin/users/add") Dodaj
         div(class='list-bar')
+          table(class='table table-striped table-hover')
+            tr
+              th id 
+              th nazwa użytkownika
+              th Imię 
+              th nazwisko
+              th email
+              th avatar 
+              th data dodania
+              th akcje
+            each item, index in data 
+              tr
+                td=index + 1
+                td=item.nick 
+                td=item.name
+                td=item.surname
+                td=item.email
+                td=item.avatar
+                td=item.created
+                td 
+                  a(href=`/admin/users/delete/${item._id}`)
+                    button(class='action-btn btn btn-danger mx-1') usuń
+                  a(href=`/admin/users/edit/${item._id}`)
+                    button(type="button" class='action-btn btn btn-warning mx-1') edytuj 
+                  a(href=`/admin/users/show/${item._id}`)
+                    button(class='action-btn btn btn-success mx-1') pokaż
+

@@ -10,6 +10,12 @@ const usersSchema = new Schema({
     password: {type: String, required: [true, 'Pole hasło jest wymagane !']},
     avatar: {type: String, default: 'nopicture'},
     created: {type: Date, default: Date.now},
+    adres: {type: String},
+    kod: {type: String},
+    city: {type: String},
+    phone: {type: String},
+    mobile: {type: String},
+    fax: {type: String},
 });
 
 module.exports = mongoose.model('Users', usersSchema);

@@ -72,7 +72,7 @@ router.post('/news/add', (req, res) => {
   const userSurname = req.session.admin.sesSurname;
   const userAvatar = req.session.admin.sesAvatar;
 
-
+  console.log(body);
   newsData.save((err) => {
     if(err) {
       res.render('admin/news-form', {
@@ -260,21 +260,29 @@ router.get('/users/edit/:id', (req, res) => {
       userName: userName,
       userSurname: userSurname,
       userAvatar: userAvatar,
-      data
+      data,
+      errors:{}
     });
   })
 });
 
 router.post('/users/update', (req, res) => {
   const body = req.body;
-
+  console.log(body);
   Users.findByIdAndUpdate(body.id, {
     nick: body.nick,
     name: body.name,
     surname: body.surname,
     email: body.email,
+    password: body.password,
     avatar: body.avatar,
-    created: body.created
+    created: body.created,
+    adres: body.adres,
+    kod: body.kod,
+    city: body.city,
+    phone: body.phone,
+    mobile: body.mobile,
+    fax: body.fax,
   }, (err) => {
     res.redirect('/admin/users-list')
   })
@@ -284,6 +292,22 @@ router.get('/users/delete/:id', (req, res) => {
 
   Users.findByIdAndDelete(req.params.id, (err) => {
     res.redirect('/admin/users-list')
+  })
+});
+
+router.get('/users/show/:id', (req, res) => {
+  const userName = req.session.admin.sesName;
+  const userSurname = req.session.admin.sesSurname;
+  const userAvatar = req.session.admin.sesAvatar;
+
+  Users.findById(req.params.id, (err, data) => {   
+    res.render('admin/users-show', { 
+      title: 'Dane użytkownika',
+      userName: userName,
+      userSurname: userSurname,
+      userAvatar: userAvatar,
+      data,
+    });
   })
 });
 

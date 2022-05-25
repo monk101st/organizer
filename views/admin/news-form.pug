@@ -24,15 +24,20 @@ block content
       if errors.errors !== undefined 
           each message in errors.errors 
               p(class='validation-alert')=message
-              
       form(method='post')
           div(class='mb-3')
               label(class='form-label mx-2') Tytuł:
               input(type='text' name='title' class='form-control' value=body.title || '' )
           div(class='mb-3')
+              label(class='form-label mx-2') Kategoria:
+              input(type='text' name='category' class='form-control' value=body.title || '' )
+          div(class='mb-3')
               label(class='form-label mx-2') Autor:
               input(type='text' name='author' class='form-control' value=body.author || '' )
           div(class='mb-3')
-              label(class='form-label mx-2') Treść:
+              label(class='form-label mx-2') Opis:
               textarea(class='form-control' type='text' name='description' rows='5')=body.description || ''
+          div(class='mb-3')
+              label(class='form-label mx-2') Treść artykułu:
+              textarea(class='form-control' type='text' name='articleText' rows='5')=body.description || ''
           button(type='submit' class='btn btn-primary') Dodaj

@@ -2,7 +2,18 @@ extends layout
 
 block content
   div(class='news-bar')
-    h1= title
-    p Welcome to #{title}
-    span=path
+    div(class='title-news-bar')
+    div(class='row  row-cols-1 row-cols-md-2 row-cols-lg-3 p-5')
+      each item in data
+        div(class='col p-2')
+          div(class='news-card card p-2')
+            div(class='card-header-bar')=item.created
+            img(src="/images/about-card-1.jpg", alt="" class='news-card-img')
+            div(class='card-body')
+              h5(class='card-title')=item.title
+              p(class='card-text')=item.description
+              p(class='card-author')=item.author
+            div(class='card-footer-bar')
+              a(href=`/news/show/${item._id}` class='btn btn-primary') więcej... 
+
 

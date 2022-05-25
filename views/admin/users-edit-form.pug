@@ -21,31 +21,55 @@ block content
           +menuItem('Settings', '/admin/settings-list')
     div(class='content-column col-10 py-5')
       h3(class='title-admin-page') #{title}
-
-              
+      if errors.errors !== undefined 
+          each message in errors.errors 
+              p(class='validation-alert')=message
       form(action='/admin/users/update' method='post')
-        div(class='mb-3')
-          label(class='form-label mx-2') ID:
-          input(type='text' name='id' class='form-control' value=data._id || '' )
-        div(class='mb-3')
-          label(class='form-label mx-2') Nick - Nazwa użytkownika:
-          input(type='text' name='nick' class='form-control' value=data.nick || '' )
-        div(class='mb-3')
-          label(class='form-label mx-2') Imię:
-          input(type='text' name='name' class='form-control' value=data.name || '' )
-        div(class='mb-3')
-          label(class='form-label mx-2') Nazwisko:
-          input(type='text' name='surname' class='form-control' value=data.surname || '' )
-        div(class='mb-3')
-          label(class='form-label mx-2') Email:
-          input(type='email' name='email' class='form-control' value=data.email || '' )
-        div(class='mb-3')
-          label(class='form-label mx-2') Password:
-          input(type='password' name='email' class='form-control' value=data.password || '' )
-        div(class='mb-3')
-          label(class='form-label mx-2') Avatar:
-          input(type='text' name='avatar' class='form-control' value=data.avatar || '' )
-        div(class='mb-3')
-          label(class='form-label mx-2') Data dodania:
-          input(type='text' name='created' class='form-control' value=data.created || '' )
-        button(type='submit' class='btn btn-primary') Zapisz
+        div(class='row m-0')
+          div(class='col')
+            h3(class='py-3') Dane logowania
+            div(class='mb-3')
+              label(class='form-label mx-2') ID:
+              input(type='text' name='id' class='form-control' value=data._id || '' )
+            div(class='mb-3')
+              label(class='form-label mx-2') Nick - Nazwa użytkownika:
+              input(type='text' name='nick' class='form-control' value=data.nick || '' )
+            div(class='mb-3')
+              label(class='form-label mx-2') Imię:
+              input(type='text' name='name' class='form-control' value=data.name || '' )
+            div(class='mb-3')
+              label(class='form-label mx-2') Nazwisko:
+              input(type='text' name='surname' class='form-control' value=data.surname || '' )
+            div(class='mb-3')
+              label(class='form-label mx-2') Email:
+              input(type='email' name='email' class='form-control' value=data.email || '' )
+            div(class='mb-3')
+              label(class='form-label mx-2') Password:
+              input(type='password' name='password' class='form-control' value=data.password || '' )
+            div(on(type='submit' class='btn btn-primary') Zapiszclass='mb-3')
+              label(class='form-label mx-2') Avatar:
+              input(type='text' name='avatar' class='form-control' value=data.avatar || '' )
+            div(class='mb-3')
+              label(class='form-label mx-2') Data dodania:
+              input(type='text' name='created' class='form-control' value=data.created || '' )
+          div(class='col')
+            h3(class='py-3') Dane personalne
+            div(class='mb-3')
+              label(class='form-label mx-2') Adres:
+              input(type='text' name='adres' class='form-control' value=data.adres || '' )
+            div(class='mb-3')
+              label(class='form-label mx-2') Kod pocztowy:
+              input(type='text' name='kod' class='form-control' value=data.kod || '' )
+            div(class='mb-3')
+              label(class='form-label mx-2') Miasto:
+              input(type='text' name='city' class='form-control' value=data.city || '' )
+            div(class='mb-3')
+              label(class='form-label mx-2') Telefon:
+              input(type='text' name='phone' class='form-control' value=data.phone || '' )
+            div(class='mb-3')
+              label(class='form-label mx-2') Mobile:
+              input(type='text' name='mobile' class='form-control' value=data.mobile || '' )
+            div(class='mb-3')
+              label(class='form-label mx-2') Fax:
+              input(type='text' name='fax' class='form-control' value=data.fax || '' )
+            butt

@@ -15,7 +15,6 @@ db.once('open', function() {
   console.log('connected...')
 })
 
-
 var indexRouter = require('./routes/index');
 var aboutRouter = require('./routes/about');
 var newsRouter = require('./routes/news');
@@ -54,9 +53,6 @@ app.use('/news', newsRouter);
 app.use('/projects', projectsRouter);
 app.use('/quiz', quizRouter);
 app.use('/admin', adminRouter);
-
-
-
 
 
 // catch 404 and forward to error handler

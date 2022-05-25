@@ -24,24 +24,46 @@ block content
       if errors.errors !== undefined 
           each message in errors.errors 
               p(class='validation-alert')=message
-              
       form( method='post')
-        div(class='mb-3')
-          label(class='form-label mx-2') Nick - Nazwa użytkownika:
-          input(type='text' name='nick' class='form-control' value=body.nick || '' )
-        div(class='mb-3')
-          label(class='form-label mx-2') Imię:
-          input(type='text' name='name' class='form-control' value=body.name || '' )
-        div(class='mb-3')
-          label(class='form-label mx-2') Nazwisko:
-          input(type='text' name='surname' class='form-control' value=body.surname || '' )
-        div(class='mb-3')
-          label(class='form-label mx-2') Email:
-          input(type='email' name='email' class='form-control' value=body.surname || '' )
-        div(class='mb-3')
-          label(class='form-label mx-2') Password:
-          input(type='password' name='password' class='form-control' value=body.surname || '' )
-        div(class='mb-3')
-          label(class='form-label mx-2') Avatar:
-          input(type='text' name='avatar' class='form-control' value=body.surname || '' )
-        button(type='submit' class='btn btn-primary') Dodaj
+        div(class='row m-0')
+          div(class='col')
+            h3(class='py-3') Dane logowania
+            div(class='mb-3')
+              label(class='form-label mx-2') Nick - Nazwa użytkownika:
+              input(type='text' name='nick' class='form-control' value=body.nick || '' )
+            div(class='mb-3')
+              label(class='form-label mx-2') Imię:
+              input(type='text' name='name' class='form-control' value=body.name || '' )
+            div(class='mb-3')
+              label(class='form-label mx-2') Nazwisko:
+              input(type='text' name='surname' class='form-control' value=body.surname || '' )
+            div(class='mb-3')
+              label(class='form-label mx-2') Email:
+              input(type='email' name='email' class='form-control' value=body.surname || '' )
+            div(class='mb-3')
+              label(class='form-label mx-2') Password:
+              input(type='password' name='password' class='form-control' value=body.surname || '' )
+            div(class='mb-3')
+              label(class='form-label mx-2') Avatar:
+              input(type='text' name='avatar' class='form-control' value=body.surname || '' )
+          div(class='col')
+            h3(class='py-3') Dane personalne
+            div(class='mb-3')
+              label(class='form-label mx-2') Adres:
+              input(type='text' name='adres' class='form-control' value=body.adres || '' )
+            div(class='mb-3')
+              label(class='form-label mx-2') Kod pocztowy:
+              input(type='text' name='kod' class='form-control' value=body.kod || '' )
+            div(class='mb-3')
+              label(class='form-label mx-2') Miasto:
+              input(type='text' name='city' class='form-control' value=body.city || '' )
+            div(class='mb-3')
+              label(class='form-label mx-2') Telefon:
+              input(type='text' name='phone' class='form-control' value=body.phone || '' )
+            div(class='mb-3')
+              label(class='form-label mx-2') Mobile:
+              input(type='text' name='mobile' class='form-control' value=body.mobile || '' )
+            div(class='mb-3')
+              label(class='form-label mx-2') Fax:
+              input(type='text' name='fax' class='form-control' value=body.fax || '' )
+            button(type='submit' class='btn btn-primary') Dodaj

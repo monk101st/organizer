@@ -41,5 +41,11 @@ block content
                 td=item.created
                 td=item.author
                 td 
-                  a(href=`/admin/news/delete/${item._id}`) usuń
+                  a(href=`/admin/news/delete/${item._id}`)
+                    button(class='action-btn btn btn-danger mx-1') usuń
+                  a(href=`/admin/news/edit/${item._id}`)
+                    button(type="button" class='action-btn btn btn-warning mx-1') edytuj 
+                  a(href=`/admin/news/show/${item._id}`)
+                    button(class='action-btn btn btn-success mx-1') pokaż
+
                   

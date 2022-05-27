@@ -3,6 +3,7 @@ const router = express.Router();
 const News = require('../models/news');
 const Abouts = require('../models/abouts');
 const Users = require('../models/users');
+const Projects = require('../models/projects');
 
 router.all('*', (req, res, next) => {
   if(!req.session.admin) {
@@ -87,7 +88,38 @@ router.post('/news/add', (req, res) => {
     }
     res.redirect('/admin/news-list')
   });
+});
 
+router.get('/news/edit/:id', (req, res) => {
+  const userName = req.session.admin.sesName;
+  const userSurname = req.session.admin.sesSurname;
+  const userAvatar = req.session.admin.sesAvatar;
+
+  News.findById(req.params.id, (err, data) => {
+    console.log(data);
+    res.render('admin/news-edit-form', { 
+      title: 'Edycja użytkownika',
+      userName: userName,
+      userSurname: userSurname,
+      userAvatar: userAvatar,
+      data,
+      errors:{}
+    });
+  });
+});
+
+router.post('/news/update', (req, res) => {
+  const body = req.body;
+  console.log(body);
+  News.findByIdAndUpdate(body.id, {
+    title: body.title,
+    category: body.category,
+    author: body.author,
+    description: body.description,
+    articleText: body.articleText,
+  }, (err) => {
+    res.redirect('/admin/news-list')
+  })
 });
 
 router.get('/news/delete/:id', (req, res) => {
@@ -96,6 +128,23 @@ router.get('/news/delete/:id', (req, res) => {
     res.redirect('/admin/news-list')
   })
 });
+
+router.get('/news/show/:id', (req, res) => {
+  const userName = req.session.admin.sesName;
+  const userSurname = req.session.admin.sesSurname;
+  const userAvatar = req.session.admin.sesAvatar;
+
+  News.findById(req.params.id, (err, data) => {
+    res.render('admin/news-show', { 
+      title: 'Podgląd artykułu',
+      userName: userName,
+      userSurname: userSurname,
+      userAvatar: userAvatar,
+      data,
+      errors:{}
+    });
+  });
+});
 /*######### ABOUT ROUTER ##############*/
 
 router.get('/about-list', (req, res) => {
@@ -103,12 +152,16 @@ router.get('/about-list', (req, res) => {
   const userSurname = req.session.admin.sesSurname;
   const userAvatar = req.session.admin.sesAvatar;
 
-  res.render('admin/about-list', { 
-    title: 'About List',
-    userName: userName,
-    userSurname: userSurname,
-    userAvatar: userAvatar,
-  });
+  Abouts.find({}, (err, data) => {
+
+    res.render('admin/about-list', { 
+      title: 'Abouts List',
+      userName: userName,
+      userSurname: userSurname,
+      userAvatar: userAvatar,
+      data
+    });
+  })
 });
 
   router.get('/about/add', (req, res) => {
@@ -137,7 +190,6 @@ router.post('/about/add', (req, res) => {
   const userSurname = req.session.admin.sesSurname;
   const userAvatar = req.session.admin.sesAvatar;
 
-
   aboutsData.save((err) => {
     if(err) {
       res.render('admin/about-form', {
@@ -155,6 +207,60 @@ router.post('/about/add', (req, res) => {
 
 });
 
+router.get('/abouts/edit/:id', (req, res) => {
+  const userName = req.session.admin.sesName;
+  const userSurname = req.session.admin.sesSurname;
+  const userAvatar = req.session.admin.sesAvatar;
+
+  Abouts.findById(req.params.id, (err, data) => {
+    console.log(data);
+    res.render('admin/about-edit-form', { 
+      title: 'Edycja artykułu About',
+      userName: userName,
+      userSurname: userSurname,
+      userAvatar: userAvatar,
+      data,
+      errors:{}
+    });
+  })
+});
+
+router.post('/abouts/update', (req, res) => {
+  const body = req.body;
+  console.log(body);
+  Abouts.findByIdAndUpdate(body.id, {
+    title: body.title,
+    author: body.author,
+    description: body.description,
+  }, (err) => {
+    res.redirect('/admin/about-list')
+  })
+});
+
+router.get('/abouts/delete/:id', (req, res) => {
+
+  Abouts.findByIdAndDelete(req.params.id, (err) => {
+    res.redirect('/admin/about-list')
+  })
+});
+
+router.get('/abouts/show/:id', (req, res) => {
+  const userName = req.session.admin.sesName;
+  const userSurname = req.session.admin.sesSurname;
+  const userAvatar = req.session.admin.sesAvatar;
+
+  Abouts.findById(req.params.id, (err, data) => {
+    res.render('admin/about-show', { 
+      title: 'Podgląd Abouts',
+      userName: userName,
+      userSurname: userSurname,
+      userAvatar: userAvatar,
+      data,
+      errors:{}
+    });
+  });
+});
+
 /*######### PROJECT ROUTER ##############*/
 
 router.get('/project-list', (req, res) => {
@@ -162,13 +268,112 @@ router.get('/project-list', (req, res) => {
   const userSurname = req.session.admin.sesSurname;
   const userAvatar = req.session.admin.sesAvatar;
 
-  console.log(req.session.admin);
-  res.render('admin/project-list', { 
-    title: 'Project List',
+
+  Projects.find({}, (err, data) => {
+
+    res.render('admin/project-list', { 
+      title: 'Project List',
+      userName: userName,
+      userSurname: userSurname,
+      userAvatar: userAvatar,
+      data
+    });
+  })
+});
+
+router.get('/project/add', (req, res) => {
+  const userName = req.session.admin.sesName;
+  const userSurname = req.session.admin.sesSurname;
+  const userAvatar = req.session.admin.sesAvatar;
+
+
+  res.render('admin/project-form', { 
+    title: 'Dodaj projekt',
     userName: userName,
     userSurname: userSurname,
     userAvatar: userAvatar,
+    body: {},
+    errors: {}
   });
+});
+
+router.post('/project/add', (req, res) => {
+  const body = req.body;
+
+  const projectsData = new Projects(body);
+  const errors = projectsData.validateSync();
+  const userName = req.session.admin.sesName;
+  const userSurname = req.session.admin.sesSurname;
+  const userAvatar = req.session.admin.sesAvatar;
+  
+  projectsData.save((err) => {
+    if(err) {
+      res.render('admin/project-form', {
+        title: 'Dodaj project',
+        userName: userName,
+        userSurname: userSurname,
+        userAvatar: userAvatar,
+        errors,
+        body
+      });
+      return;
+    }
+    res.redirect('/admin/project-list')
+  });
+
+});
+
+router.get('/projects/edit/:id', (req, res) => {
+  const userName = req.session.admin.sesName;
+  const userSurname = req.session.admin.sesSurname;
+  const userAvatar = req.session.admin.sesAvatar;
+
+  Projects.findById(req.params.id, (err, data) => {
+    console.log(data);
+    res.render('admin/projects-edit-form', { 
+      title: 'Edycja projektu',
+      userName: userName,
+      userSurname: userSurname,
+      userAvatar: userAvatar,
+      data,
+      errors:{}
+    });
+  });
+});
+
+router.post('/projects/update', (req, res) => {
+  const body = req.body;
+  console.log(body.id);
+  Projects.findByIdAndUpdate(body.id, {
+    title: body.title,
+    author: body.author,
+    description: body.description,
+  }, (err) => {
+    res.redirect('/admin/project-list')
+  })
+});
+
+router.get('/projects/delete/:id', (req, res) => {
+
+  Projects.findByIdAndDelete(req.params.id, (err) => {
+    res.redirect('/admin/project-list')
+  })
+});
+
+router.get('/projects/show/:id', (req, res) => {
+  const userName = req.session.admin.sesName;
+  const userSurname = req.session.admin.sesSurname;
+  const userAvatar = req.session.admin.sesAvatar;
+
+  Projects.findById(req.params.id, (err, data) => {   
+    res.render('admin/project-show', { 
+      title: 'Dane projektu',
+      userName: userName,
+      userSurname: userSurname,
+      userAvatar: userAvatar,
+      data,
+    });
+  })
 });
 
 /*######### QUIZES ROUTER ##############*/
@@ -263,12 +468,12 @@ router.get('/users/edit/:id', (req, res) => {
       data,
       errors:{}
     });
-  })
+  });
 });
 
 router.post('/users/update', (req, res) => {
   const body = req.body;
-  console.log(body);
+  console.log(body.id);
   Users.findByIdAndUpdate(body.id, {
     nick: body.nick,
     name: body.name,
@@ -276,7 +481,6 @@ router.post('/users/update', (req, res) => {
     email: body.email,
     password: body.password,
     avatar: body.avatar,
-    created: body.created,
     adres: body.adres,
     kod: body.kod,
     city: body.city,

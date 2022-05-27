@@ -43,7 +43,7 @@ block content
                 td=item.surname
                 td=item.email
                 td=item.avatar
-                td=item.created
+                td #{item.created.getFullYear()}:#{item.created.getMonth()}:#{item.created.getDate()}
                 td 
                   a(href=`/admin/users/delete/${item._id}`)
                     button(class='action-btn btn btn-danger mx-1') usuń

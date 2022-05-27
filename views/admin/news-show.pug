@@ -1,0 +1,43 @@
+extends ../layout
+
+block content
+  div(class='admin-index-bar row m-0')
+    div(class='menu-column col-2 py-3')
+      div(class='user-info-bar') 
+        p(class='username-bar') #{userName} #{userSurname}
+          img(src=`/images/avatars/${userAvatar}.jpg`, alt="" class='user-avatar')
+      div(class='buttons-bar p-3')
+        button(class='btn btn-primary w-100 my-1')
+          +menuItem('About', '/admin/about-list')
+        button(class='btn btn-primary w-100 my-1')
+          +menuItem('News', '/admin/news-list')
+        button(class='btn btn-primary w-100 my-1')
+          +menuItem('Project', '/admin/project-list')
+        button(class='btn btn-primary w-100 my-1')
+          +menuItem('Quizes', '/admin/quizes-list')
+        button(class='btn btn-info w-100 my-1')
+          +menuItem('Users', '/admin/users-list')
+        button(class='btn btn-info w-100 my-1')
+          +menuItem('Settings', '/admin/settings-list')
+    div(class='content-column col-10 py-5')
+        h3(class='title-admin-page') #{title}
+        div(class='row m-0 py-5')
+            div(class='col')
+                p Tytuł artykułu: 
+                    span(class='text-light') #{data.title}
+                p Autor: 
+                    span(class='text-light') #{data.author}
+                p Kategoria: 
+                    span(class='text-light') #{data.category}
+            div(class='col')
+                div Wstęp: 
+                    p(class='text-light') #{data.description}
+                div Treść artykułu: 
+                    p(class='text-light') #{data.articleText}
+                button(class='btn btn-primary m-1')
+                    +menuItem('Powrót', '/admin/news-list')
+                button(class='btn btn-warning m-1')
+                    +menuItem('Edycja', `/admin/news/edit/${data.id}`)
+                button(class='btn btn-danger m-1')
+                    +menuItem('Usuń', `/admin/news/delete/${data.id}`)
+

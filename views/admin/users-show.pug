@@ -20,4 +20,38 @@ block content
         button(class='btn btn-info w-100 my-1')
           +menuItem('Settings', '/admin/settings-list')
     div(class='content-column col-10 py-5')
-      h3(class='title-admin-page') #{title}
+        h3(class='title-admin-page') #{title}
+        div(class='row m-0 py-5')
+            div(class='col')
+                p Nick: 
+                    span(class='text-light') #{data.nick}
+                p Imię: 
+                    span(class='text-light') #{data.name}
+                p Nazwisko: 
+                    span(class='text-light') #{data.surname}
+                p Email: 
+                    span(class='text-light') #{data.email}
+                p Avatar: 
+                    span(class='text-light') #{data.avatar}
+            div(class='col')
+                p Adres: 
+                    span(class='text-light') #{data.adres}
+                p Kod pocztowy: 
+                    span(class='text-light') #{data.kod}
+                p Miasto: 
+                    span(class='text-light') #{data.city}
+                p Telefon: 
+                    span(class='text-light') #{data.phone}
+                p Mobile: 
+                    span(class='text-light') #{data.mobile}
+                p Fax: 
+                    span(class='text-light') #{data.fax}
+            div(class='col')
+                p
+                  img(src=`/images/avatars/${data.avatar}.jpg`, alt="" class='user-avatar')
+                button(class='btn btn-primary m-1')
+                    +menuItem('Powrót', '/admin/users-list')
+                button(class='btn btn-warning m-1')
+                    +menuItem('Edycja', `/admin/users/edit/${data.id}`)
+                button(class='btn btn-danger m-1')
+                    +menuItem('Usuń', `/admin/users/delete/${data.id}`)

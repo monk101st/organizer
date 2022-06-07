@@ -2,15 +2,22 @@ const express = require('express');
 const router = express.Router();
 const News = require('../models/news');
 
+
 /* GET news page. */
 router.get('/', (req, res, next) => {
-  const findNews = News.find(); //Wyszukanie wszystkich newsów
+  
+  const search = req.query.search || '';
+
+  const findNews = News
+  .find({title: new RegExp(search.trim(), 'i')}) //Wyszukanie wszystkich newsów
+  .sort({created: -1}); //Sortowanie od najnowszego
 
   findNews.exec((err, data) => {    //metoda exec pozwala na kilkukrotnewykorzystanie findNews
 
     res.render('news', { 
       title: 'News',
-      data
+      data,
+      search
    });
   });
 });

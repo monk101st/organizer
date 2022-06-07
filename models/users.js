@@ -8,6 +8,7 @@ const usersSchema = new Schema({
     surname: {type: String, required: [true, 'Pole nazwisko jest wymagane !']},
     email: {type: String, required: [true, 'Pole email jest wymagane !']},
     password: {type: String, required: [true, 'Pole hasło jest wymagane !']},
+    rulacc: {type: Boolean, required: [true, 'Musisz zatwierdzić regulamin']},
     avatar: {type: String, default: 'nopicture'},
     created: {type: Date, default: Date.now},
     adres: {type: String},

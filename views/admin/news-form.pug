@@ -18,6 +18,8 @@ block content
         button(class='btn btn-info w-100 my-1')
           +menuItem('Users', '/admin/users-list')
         button(class='btn btn-info w-100 my-1')
+          +menuItem('Media', '/admin/media-list')
+        button(class='btn btn-info w-100 my-1')
           +menuItem('Settings', '/admin/settings-list')
     div(class='content-column col-10 py-5')
       h3(class='title-admin-page') #{title}
@@ -34,6 +36,9 @@ block content
           div(class='mb-3')
               label(class='form-label mx-2') Autor:
               input(type='text' name='author' class='form-control' value=body.author || '' )
+          div(class='mb-3')
+              <label for="formFile" class="form-label">Default file input example</label>
+              <input class="form-control" type="file" id="formFile" name="picture">
           div(class='mb-3')
               label(class='form-label mx-2') Opis:
               textarea(class='form-control' type='text' name='description' rows='5')=body.description || ''

@@ -1,0 +1,17 @@
+extends layout
+
+block content
+    div(class='title-api-container')
+        h1= title
+        p Welcome to #{title}
+    div(class='content-api-container row m-0')
+        div(class='api-column col')
+            form(action='addfile' method="post" enctype="multipart/form-data")
+                div(class="mb-3")
+                    label(for="formFileMultiple" class="form-label") Wybierz plik
+                    input( class="form-control" type="file" id="formFileMultiple" name='filename' multiple)
+                div(class="mb-3")
+                    button(class='btn btn-primary' type='submit') Upload
+        div(class='api-column col')
+        div(class='api-column col')
+

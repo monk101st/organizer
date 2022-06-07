@@ -1,9 +1,14 @@
 const express = require('express');
 const router = express.Router();
+const path = require('path');
+const multer = require('multer');
+const fs = require('fs');
 const News = require('../models/news');
 const Abouts = require('../models/abouts');
 const Users = require('../models/users');
 const Projects = require('../models/projects');
+const Media = require('../models/media');
+const Gallerys = require('../models/gallerys');
 
 router.all('*', (req, res, next) => {
   if(!req.session.admin) {
@@ -67,13 +72,19 @@ router.get('/news/add', (req, res) => {
 router.post('/news/add', (req, res) => {
   const body = req.body;
 
+
+  console.log(body.picture);
+
   const newsData = new News(body);
   const errors = newsData.validateSync();
   const userName = req.session.admin.sesName;
   const userSurname = req.session.admin.sesSurname;
   const userAvatar = req.session.admin.sesAvatar;
 
-  console.log(body);
+  fs.readFile(body.picture, (err, data) => {
+    console.log(data);
+  });
+
   newsData.save((err) => {
     if(err) {
       res.render('admin/news-form', {
@@ -400,7 +411,7 @@ router.get('/users-list', (req, res) => {
   const userAvatar = req.session.admin.sesAvatar;
 
   Users.find({}, (err, data) => {
-
+    console.log(data);
     res.render('admin/users-list', { 
       title: 'Users List',
       userName: userName,
@@ -515,6 +526,299 @@ router.get('/users/show/:id', (req, res) => {
   })
 });
 
+/*######### MEDIA ROUTER ##############*/
+
+/* ------ Storage do Media */
+var mediaStorage = multer.diskStorage({
+  destination: function (req, file, callback) {
+    callback(null, "./public/images/media");
+  },
+  filename: function (req, file, callback) {
+    callback(null, file.fieldname + "_" + Date.now() + "_" + file.originalname);
+  },
+});
+ 
+var uploadMedia = multer({
+  storage: mediaStorage,
+}).single("image"); //Field name and max count
+
+/* --------------------- End Storage----------------- */
+
+router.get('/media-list', (req, res) => {
+  const userName = req.session.admin.sesName;
+  const userSurname = req.session.admin.sesSurname;
+  const userAvatar = req.session.admin.sesAvatar;
+
+  const mediaData = Media.find({})
+
+  mediaData.exec(function(err,data){
+      if(err) throw err;
+
+
+    res.render('admin/media-list', { 
+      title: 'Media List',
+      userName: userName,
+      userSurname: userSurname,
+      userAvatar: userAvatar,
+      data
+    });
+  });
+});
+
+router.get('/media/add', (req, res) => {
+  const userName = req.session.admin.sesName;
+  const userSurname = req.session.admin.sesSurname;
+  const userAvatar = req.session.admin.sesAvatar;
+  const gallerysData = Gallerys.find({})
+
+  gallerysData.exec(function(err,galdata){
+
+    console.log(galdata)
+
+  res.render('admin/media-form', { 
+    title: 'Dodawanie plików',
+    userName: userName,
+    userSurname: userSurname,
+    userAvatar: userAvatar,
+    galdata,
+    data: {},
+    errors: {}
+  });
+})
+
+});
+
+router.post("/media/add", (req, res) => {
+  const userName = req.session.admin.sesName;
+  const userSurname = req.session.admin.sesSurname;
+  const userAvatar = req.session.admin.sesAvatar;
+  const mediaData = Media.find({})
+  const gallerysData = Gallerys.find({})
+  
+  
+  uploadMedia(req, res, function (err) {
+    console.log(req.file);
+    console.log(req.body.name);
+    if (err) {
+      console.log(err);
+      return res.end("Something went wrong");
+    } else {
+      console.log(req.file.path);
+      var mediaName = req.file.filename;
+      var mediaTitle = req.body.title;
+      var mediaGallery = req.body.gallery;
+      var mediaDate = req.body.date;
+      var mediaAuthor = req.body.author;
+      var mediaDescription = req.body.description;
+ 
+      var mediaDetails = new Media({
+        title: mediaTitle,
+        gallery: mediaGallery,
+        filename: mediaName,
+        date: mediaDate,
+        author: mediaAuthor,
+        description: mediaDescription,
+      });
+ 
+        mediaDetails.save(function (err, doc) {
+          if (err) throw err;
+  
+          console.log("Image Saved");
+  
+            mediaData.exec(function(err,data){
+                if(err) throw err;
+
+
+                    res.render('admin/media-form', {
+                      title: 'Dodawanie plików',
+                      userName: userName,
+                      userSurname: userSurname,
+                      userAvatar: userAvatar,
+                      data,
+                      errors: {},
+                      success:true})
+                })
+            });
+         }
+    });
+});
+
+router.get('/media/edit/:id', (req, res) => {
+  const userName = req.session.admin.sesName;
+  const userSurname = req.session.admin.sesSurname;
+  const userAvatar = req.session.admin.sesAvatar;
+  console.log(req.params.id);
+
+  Media.findById(req.params.id, (err, data) => {
+
+    res.render('admin/media-edit-form', { 
+      title: 'Edycja pliku',
+      userName: userName,
+      userSurname: userSurname,
+      userAvatar: userAvatar,
+      data,
+      errors:{}
+    });
+  });
+});
+
+router.post('/media/update', (req, res) => {
+  console.log(req);
+  uploadMedia(req, res, function (err) {
+    const body = req.body;
+    const file = req.file;
+    
+    console.log(file);
+    console.log(body);
+    if (err) {
+      console.log(err);
+      return res.end("Something went wrong");
+    } else {
+      
+      if (file !== undefined) {
+          console.log(req.file.path);
+
+          Media.findByIdAndUpdate(req.body.id, {
+          title: body.title,
+          gallery: body.gallery,
+          filename: file.filename,
+          author: body.author,
+          description: body.description,
+        }, (err) => {
+          res.redirect('/admin/media-list')
+        })
+      }else {
+          Media.findByIdAndUpdate(req.body.id, {
+            title: body.title,
+            gallery: body.gallery,
+            author: body.author,
+            description: body.description,
+          }, (err) => {
+            res.redirect('/admin/media-list')
+          })
+      }
+
+}
+});
+
+})
+
+router.post('/media/delete/', (req, res) => {
+  const body = req.body;
+
+  const path = `/images/media/${body.filename}`;
+
+  console.log(path);
+
+  fs.unlinkSync("public"+path);
+
+  Media.findByIdAndDelete(body.id, (err) => {
+    res.redirect('/admin/media-list')
+  })
+});
+
+
+/* #########-GALLERY ROUTER-############### */
+
+router.get('/gallerys-list', (req, res) => {
+  const userName = req.session.admin.sesName;
+  const userSurname = req.session.admin.sesSurname;
+  const userAvatar = req.session.admin.sesAvatar;
+
+  const gallerysData = Gallerys.find({})
+
+  gallerysData.exec(function(err,data){
+      if(err) throw err;
+
+
+    res.render('admin/gallerys-list', { 
+      title: 'Gallerys List',
+      userName: userName,
+      userSurname: userSurname,
+      userAvatar: userAvatar,
+      data
+    });
+  });
+});
+
+router.get('/media/addgallery', (req, res) => {
+  const userName = req.session.admin.sesName;
+  const userSurname = req.session.admin.sesSurname;
+  const userAvatar = req.session.admin.sesAvatar;
+
+  console.log(req.session.admin);
+  res.render('admin/gallerys-form', { 
+    title: 'Dodaj galerię',
+    userName: userName,
+    userSurname: userSurname,
+    userAvatar: userAvatar,
+    body: {},
+    errors: {}
+  });
+
+});
+
+router.post('/media/addgallery', (req, res) => {
+  const body = req.body;
+
+  const gallerysData = new Gallerys(body);
+  const errors = gallerysData.validateSync();
+  const userName = req.session.admin.sesName;
+  const userSurname = req.session.admin.sesSurname;
+  const userAvatar = req.session.admin.sesAvatar;
+  gallerysData.save((err) => {
+    if(err) {
+      res.render('admin/gallerys-form', {
+        title: 'Dodaj użytkownika',
+        userName: userName,
+        userSurname: userSurname,
+        userAvatar: userAvatar,
+        errors,
+        body
+      });
+      return;
+    }
+    res.redirect('/admin/gallerys-list')
+  });
+
+});
+
+router.get('/media/editgallery/:id', (req, res) => {
+  const userName = req.session.admin.sesName;
+  const userSurname = req.session.admin.sesSurname;
+  const userAvatar = req.session.admin.sesAvatar;
+  console.log(req.params.id);
+
+  Gallerys.findById(req.params.id, (err, data) => {
+
+    res.render('admin/gallerys-edit-form', { 
+      title: 'Edycja pliku',
+      userName: userName,
+      userSurname: userSurname,
+      userAvatar: userAvatar,
+      data,
+      errors:{}
+    });
+  });
+});
+
+router.post('/media/updategallery', (req, res) => {
+  const body = req.body;
+  console.log(body.id);
+  Gallerys.findByIdAndUpdate(body.id, {
+    title: body.title,
+    description: body.description,
+  }, (err) => {
+    res.redirect('/admin/gallerys-list')
+  })
+});
+
+router.get('/media/deletegallery/:id', (req, res) => {
+
+  Gallerys.findByIdAndDelete(req.params.id, (err) => {
+    res.redirect('/admin/gallerys-list')
+  })
+});
 /*######### SETTINGS ROUTER ##############*/
 
 router.get('/settings-list', (req, res) => {
@@ -522,7 +826,7 @@ router.get('/settings-list', (req, res) => {
   const userSurname = req.session.admin.sesSurname;
   const userAvatar = req.session.admin.sesAvatar;
 
-  console.log(req.session.admin);
+
   res.render('admin/settings-list', { 
     title: 'Settings List',
     userName: userName,

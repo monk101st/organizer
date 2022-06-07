@@ -18,6 +18,8 @@ block content
         button(class='btn btn-info w-100 my-1')
           +menuItem('Users', '/admin/users-list')
         button(class='btn btn-info w-100 my-1')
+          +menuItem('Media', '/admin/media-list')
+        button(class='btn btn-info w-100 my-1')
           +menuItem('Settings', '/admin/settings-list')
     div(class='content-column col-10 py-5')
         h3(class='title-admin-page') #{title}
@@ -38,7 +40,7 @@ block content
               tr
                 td=index + 1
                 td=item.title 
-                td #{item.created.getFullYear()}:#{item.created.getMonth()}:#{item.created.getDate()}
+                td #{item.created.getFullYear()}:#{item.created.getMonth() + 1}:#{item.created.getDate()}
                 td=item.author
                 td 
                   a(href=`/admin/abouts/delete/${item._id}`)

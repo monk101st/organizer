@@ -2,9 +2,13 @@ extends layout
 
 block content
   div(class='single-news-bar')
-    div(class='title-news-bar')=data.title
-    div(class='description-news-bar')=data.description
-    div(class='text-news-bar')=data.articleText
-    div(class='author-news-bar')=data.author
+    div(class='title-news-bar p-3')
+      h3=data.title
+    div(class='description-news-bar p-3')
+      p=data.description
+    div(class='text-news-bar p-3')
+      p=data.articleText
+    div(class='author-news-bar p-3')
+      p=data.author
 
 

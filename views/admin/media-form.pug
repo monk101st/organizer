@@ -1,0 +1,66 @@
+extends ../layout
+
+block content
+  div(class='admin-index-bar row m-0')
+    div(class='menu-column col-2 py-3')
+      div(class='user-info-bar') 
+        p(class='username-bar') #{userName} #{userSurname}
+          img(src=`/images/avatars/${userAvatar}.jpg`, alt="" class='user-avatar')
+      div(class='buttons-bar p-3')
+        button(class='btn btn-primary w-100 my-1')
+          +menuItem('About', '/admin/about-list')
+        button(class='btn btn-primary w-100 my-1')
+          +menuItem('News', '/admin/news-list')
+        button(class='btn btn-primary w-100 my-1')
+          +menuItem('Project', '/admin/project-list')
+        button(class='btn btn-primary w-100 my-1')
+          +menuItem('Quizes', '/admin/quizes-list')
+        button(class='btn btn-info w-100 my-1')
+          +menuItem('Users', '/admin/users-list')
+        button(class='btn btn-info w-100 my-1')
+          +menuItem('Media', '/admin/media-list')
+        button(class='btn btn-info w-100 my-1')
+          +menuItem('Settings', '/admin/settings-list')
+    div(class='content-column col-10 py-5')
+        div(class='media-nav-bar')
+            h3(class='title-admin-page') #{title}
+            if errors.errors !== undefined 
+                each message in errors.errors 
+                    p(class='validation-alert')=message
+        div(class='row m-0')
+            if success
+                div(class="alert alert-success alert-dismissible")
+                    a(href="/admin/media-list" class="close" data-dismiss="alert" aria-label="close") &times
+                    strong Success! Your Image File is Uploaded.
+            else
+                div(class='col')
+
+                    form( method='post' enctype='multipart/form-data')
+                        div(class='mb-3')
+                            label(class='form-label mx-2') Tutuł obrazka:
+                            input(type='text' name='title' class='form-control' value=data.title || '' )
+                        div(class='mb-3')
+                            label(class='form-label mx-2') Nazwa galerii:
+                            select(class="form-select" aria-label="Default select example" name='gallery')
+                              option(selected) Wybierz galerię...
+                              each item in galdata
+                               option(value=`${item.tilte}`)=item.title
+                        div(class='mb-3')
+                            label(class='form-label mx-2') Autor:
+                            input(type='text' name='author' class='form-control' value=data.author || '' )
+                        div(class='mb-3')
+                            label(class='form-label mx-2') Data:
+                            input(type='date' name='date' class='form-control' value= data.date || '' required)
+                        div(class='mb-3')
+                            label(class='form-label mx-2') Opis obrazka:
+                            textarea(class='form-control' type='text' name='description' rows='5')=data.description || ''
+                        div(class='mb-3')
+                            label(for="Select Image") Wybieranie pliku
+                            input(type='file' class='form-control' name='image' id='' required)
+                        div(class='mb-3 button-add-bar')
+                            a(href="/admin/media-list")
+                              button(class='btn btn-block btn-secondary mx-1' type='button') Anuluj
+                            button(class='btn btn-block btn-danger mx-1' type='submit') Dodaj
+
+                div(class='col')
+                    p Informacje o dodawaniu plików

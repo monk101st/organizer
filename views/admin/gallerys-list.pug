@@ -1,0 +1,59 @@
+extends ../layout
+
+
+
+block content
+  div(class='admin-index-bar row m-0')
+    div(class='menu-column col-2 py-3')
+      div(class='user-info-bar') 
+        p(class='username-bar') #{userName} #{userSurname}
+          img(src=`/images/avatars/${userAvatar}.jpg`, alt="" class='user-avatar')
+      div(class='buttons-bar p-3')
+        button(class='btn btn-primary w-100 my-1')
+          +menuItem('About', '/admin/about-list')
+        button(class='btn btn-primary w-100 my-1')
+          +menuItem('News', '/admin/news-list')
+        button(class='btn btn-primary w-100 my-1')
+          +menuItem('Project', '/admin/project-list')
+        button(class='btn btn-primary w-100 my-1')
+          +menuItem('Quizes', '/admin/quizes-list')
+        button(class='btn btn-info w-100 my-1')
+          +menuItem('Users', '/admin/users-list')
+        button(class='btn btn-info w-100 my-1')
+          +menuItem('Media', '/admin/media-list')
+        button(class='btn btn-info w-100 my-1')
+          +menuItem('Settings', '/admin/settings-list')
+    div(class='content-column col-10 py-5')
+        div(class='row m-0')
+            div(class='menu-media col-4')
+                a(href="media/add")
+                    button(class='btn btn-primary me-1') Dodaj plik
+                a(href="media/addgallery")
+                    button(class='btn btn-primary me-1') Dodaj galerię
+                a(href="/admin/media-list")
+                    button(class='btn btn-success me-1') Obrazy
+                a(href="/admin/gallerys-list")
+                    button(class='btn btn-warning me-1') Galerie
+            div(class='search-media col-4')
+                div(class="input-group mb-3")
+                    input(type="text" class="form-control m-0" placeholder="Wpisz nazwę pliku...")
+                    button(class='btn btn-primary') Szukaj
+            div(class='title-media col-4')
+                h3(class='title-admin-page') #{title}
+        div(class='row m-0')
+            div(class='col')
+                each item in data
+                    div(class='gellerys-details-bar')
+                        div(class='gallerys-details-header')
+                            h4=item.title
+                        div(class='gallerys-details-body')
+                            p=item.description
+                        div(class='gallerys-details-footer')
+                            a(href=`/admin/media/editgallery/${item._id}`) 
+                                button(class='btn btn-warning') Edytuj
+                            a(href=`/admin/media/deletegallery/${item._id}`)
+                                button(class='btn btn-danger') Usuń
+            div(class='col')
+                
+    
+    

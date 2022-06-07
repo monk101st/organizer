@@ -8,6 +8,7 @@ const newsSchema = new Schema({
   author: {type: String, required: [true, 'Pole autor jest wymagane !']},
   description: {type: String, required: [true, 'Pole treść jest wymagane !']},
   articleText: {type: String, required: [true, 'Pole treść jest wymagane !']},
+  picture: {type: String},
   created: {type: Date, default: new Date()},
   counter: {type: Number, default: 0},
 });

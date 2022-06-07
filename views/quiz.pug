@@ -1,5 +1,27 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  div(class='quiz-bar')
+    h1= title
+    div(class='quiz-form-bar row m-0')
+      div(class='col quiz-column')
+        if showForm
+          form(method='post')
+            p Jaka jest twoja ulubion pora roku?
+            ul 
+              each item in data 
+                li 
+                  label(class='quiz-label')=item.title 
+                  input(class="form-check-input" type="radio" name="quiz" value=item.id)
+            button(class='btn btn-primary my-3' type='submit') Głosuj 
+            p Aby zobaczyć wynik sondy musisz zagłosować
+        else 
+          h3 Już głosowałeś....
+          each item in data 
+            li Odpowiedź #{item.title}: #{item.vote}
+
+      div(class='col')
+      div(class='col')
+      div(class='col')
+      div(class='col')
+

@@ -31,7 +31,7 @@ body {
 
 .carousel-item {
   position: relative;
-  height: calc(100vh - 77.6px);
+  height: 100vh;
   background-position: center;
   background-size: cover;
   z-index: 0;
@@ -56,18 +56,53 @@ body {
 /* NEWS */
 
 .news-bar {
+  padding-top: 77.6px;
   width: 100%;
-  height: calc(100vh - 77.6px);
+}
+
+.search-bar {
+  position: fixed;
+  width: 100%;
+  height: 50px;
+  z-index: 1;
+  text-align: right;
+  line-height: 50px;
+}
+.search-bar form input {
+  width: 500px;
+  display: inline;
+  background-color: #12192e;
+  color: #0ca6e8;
+}
+
+.search-bar form button {
+  display: inline;
+  margin-left: 5px;
 }
 
 .news-card {
-  background-color: #cae5f0;
+  background-image: linear-gradient(to bottom right, rgb(20, 99, 225), rgb(159, 213, 243));
 
 }
 
 .card-header-bar {
   width: 100%;
   height: 30px;
+  position: relative;
+
+}
+.card-header-bar p {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 1.4rem;
+  color: #addff3;
+}
+.card-header-bar span {
+  position: absolute;
+  top: 0;
+  right: 0;
+  text-align: right;
 }
 
 .card-title {
@@ -89,20 +124,41 @@ body {
 }
 
 
-/* NEWS */
+/* NEWS SINGLE ARTICLE*/
 
 .single-news-bar {
   margin: 0 auto;
-  padding: 20px;
+  padding-top: 77.6px;
   width: 80%;
   background-color: #0ca6e8;
+}
+
+.title-news-bar h3 {
   text-align: right;
 }
+
+.description-news-bar p {
+  text-align: justify;
+  font-size: 1.8rem;
+}
+
+.text-news-bar p {
+  text-align: justify;
+  font-size: 1.8rem;
+}
+
+.author-news-bar p {
+  text-align: right;
+  font-style: italic;
+  font-weight: bold;
+}
+
+
 /* ABOUT */
 
 .about-bar {
   width: 100%;
-  height: calc(100vh - 77.6px);
+  padding-top: 77.6px;
 }
 
 .about-column .about-card-img{
@@ -167,6 +223,7 @@ body {
 .admin-index-bar  {
   position: relative;
   color: #00B7FF;
+  padding-top: 77.6px;
 }
 
 .admin-index-bar .menu-column {
@@ -221,7 +278,129 @@ body {
   padding: 1px 5px;
 }
 
+/* ADMIN MEDIA LIST */
 
+.menu-media {
+  padding: 10px;
+}
+
+.search-media {
+  padding: 10px;
+}
+
+.title-media {
+
+}
+
+.media-list-bar {
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.media-detail-bar {
+  margin: 5px;
+  padding: 5px;
+  border: 2px solid black;
+  border-radius: 3px;
+  background-image: linear-gradient(to bottom right, rgb(20, 99, 225), rgb(159, 213, 243));
+}
+.media-detail-header {
+  padding: 0;
+}
+
+.media-detail-header p {
+  font-size: 1rem;
+  font-weight: bold;
+  text-align: right;
+  color: #085573;
+}
+
+.media-detail-image {
+
+}
+
+.media-detail-image img {
+  width: 140px;
+  height: 80px;
+  border: 2px solid gray;
+}
+
+.media-button-bar {
+  text-align: center;
+}
+
+.media-show-btn,.media-edit-btn,.media-del-btn {
+  font-size: 0.9rem;
+
+}
+
+.input-invisible {
+  width: 0;
+  visibility: hidden;
+}
+
+.modal-body img {
+  width: 100%;
+  border: 2px solid gray;
+}
+
+
+.media-edit-image-bar {
+  padding: 20px;
+  text-align: center;
+}
+
+.media-edit-image-bar img {
+  width: 100%;
+  border: 2px solid gray;
+
+}
+.media-edit-image-bar p {
+  padding-top: 5px;
+}
+.media-edit-image-bar p span {
+  color: white;
+}
+
+
+.button-add-bar {
+  text-align: right;
+}
+
+
+/* --------MEDIA GALLERYS------------------- */
+
+.gellerys-details-bar {
+  padding: 5px;
+}
+
+.gallerys-details-header {
+  background-color: rgb(7, 13, 128);
+  padding: 5px;
+  text-align: right;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+}
+
+.gallerys-details-body {
+  background-color: rgb(8, 16, 153);
+  padding: 5px;
+  text-align: justify;
+}
+.gallerys-details-footer {
+  background-color: rgb(7, 13, 128);
+  padding: 5px;
+  text-align: right;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+
+.gallerys-details-footer button {
+  font-size: 0.7rem;
+  margin-left: 3px;
+}
 /* NEWS - FORM */
 
 .news-form-bar h1 {
@@ -236,4 +415,129 @@ body {
   text-align: right;
   font-size: 1.4rem;
   color: aliceblue;
+}
+
+/* PROJECTS */
+.projects-bar {
+  padding-top: 77.6px;
+}
+
+/* QUIZ */
+
+.quiz-bar {
+  padding-top: 77.6px;
+  color: #00B7FF;
+}
+
+.quiz-form-bar li {
+  margin-bottom: 10px;
+  list-style: none;
+  
+}
+
+.quiz-form-bar .quiz-column {
+  text-align: center;
+}
+.quiz-form-bar .quiz-label {
+  width: 100px;
+}
+
+/* GALLERY */
+
+.gallery-bar {
+  padding-top: 77.6px;
+  padding-left: 20px;
+  padding-right: 20px;
+  color: #00B7FF;
+}
+
+.image-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: space-between;
+  padding: 20px;
+}
+.item-list-bar {
+  padding: 5px;
+  text-align: center;
+}
+.image-list {
+  width: 200px;
+  height: 100px;
+  border: 2px solid white;
+}
+.item-list-bar p {
+  padding-top: 5px;
+  font-size: 0.9rem;
+}
+
+/* REGISTER */
+
+.register-bar {
+  padding-top: 77.6px;
+  color: #00B7FF;
+}
+.register-col {
+  padding: 20px 30px;
+}
+.register-col h3 {
+  width: 100%;
+  height: 50px;
+  background-color: #0f11115b;
+  text-align: center;
+  line-height: 50px;
+}
+.labels-column, .input-column {
+  padding: 10px 20px;
+  text-align: right;
+}
+
+.registration-info {
+  padding: 5px;
+  font-size: 1.4rem;
+  text-align: justify;
+  color: white;
+}
+
+.register-last-user {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  align-content: space-between;
+
+}
+
+.form-label {
+  line-height: 30px;
+  margin-bottom: 10px;
+}
+
+.form-check-label {
+  line-height: 15px;
+  margin-bottom: 10px;
+}
+
+.form-check-input {
+  text-align: left;
+  margin-bottom: 10px;
+}
+
+.form-control {
+  margin-bottom: 10px;
+}
+
+.p-nr, .p-title {
+  text-align: center;
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+.p-description {
+  text-align: justify;
+  font-size: 1.4rem;
+  color: white;
+}
+/* API */
+.api-bar {
+  padding-top: 77.6px;
 }

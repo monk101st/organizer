@@ -1,0 +1,27 @@
+extends layout
+
+block content
+  div(class='gallery-bar')
+    h1= title
+
+
+    if success
+        div(class="alert alert-success alert-dismissible")
+            a(href="/gallery" class="close" data-dismiss="alert" aria-label="close") &times
+            strong Success! Your Image File is Uploaded.
+    else
+        form( method='post' enctype='multipart/form-data')
+            div(class='form-group')
+                label() Nazwa
+                input(type="text" class="form-control" name='name' placeholder="imię użytkownika")
+                label(for="Select Image") Wybieranie pliku
+                input(type='file' class='form-control' name='image' id='' required)
+            div(class='form-group')
+                button(class='btn btn-block btn-danger' type='submit') Dodaj Obraz
+        div(class='image-gallery')
+            each item in data 
+                div(class='item-list-bar')
+                    img(class='image-list' src=`/images/galeries/${item.imagename}`, alt="") 
+                    p=item.imagename
+
+

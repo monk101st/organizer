@@ -6,12 +6,12 @@ block content
         div(class='register-col col')
             h3 Informacja o rejestracji
             div(class='registration-info')
-                p Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus quibusdam libero molestias voluptas, corporis ipsam distinctio aut sapiente! Dolor, aliquam aspernatur. Repellat eaque beatae molestiae doloremque libero facere et, suscipit tempora maiores dolorem ipsam blanditiis corporis reprehenderit, tenetur consectetur non iure eligendi ipsa, optio cumque soluta laboriosam expedita. Aliquid, necessitatibus.
+                p Rejestracja na stronie jest fikcyjna i ma charakter poglądowy. Jeśli jesteś na tej stronie to z pewnością otrzymałeś testowy login i hasło. Zaloguj się żebyś mógł korzystać z systemu zarządzania treścią na stronie. Jeśli nie jesteś zainteresowany to nie loguj się, a już z pewnością nie niszcz mojej pracy.
             h3 Ostatnio zarejestrowani 
             div(class='register-last-user')
                 each item in data
                     div(class='user-avatar-bar p-2 text-center') 
-                        img(src=`/images/avatars/${item.avatar}.jpg`, alt="" class='user-avatar')
+                        img(src=`/images/media/${item.avatar}`, alt="" class='user-avatar')
                         p(class='text-center py-2') #{item.nick}
         div(class='register-col col')
             h3 Rejestracja konta

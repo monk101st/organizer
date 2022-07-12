@@ -2,10 +2,10 @@ extends ../layout
 
 block content
   div(class='admin-index-bar row m-0')
-    div(class='menu-column col-2 py-3')
+    div(class='menu-column col-2 py-5')
       div(class='user-info-bar') 
         p(class='username-bar') #{userName} #{userSurname}
-          img(src=`/images/avatars/${userAvatar}.jpg`, alt="" class='user-avatar')
+          img(src=`/images/media/${userAvatar}`, alt="" class='user-avatar')
       div(class='buttons-bar p-3')
         button(class='btn btn-primary w-100 my-1')
           +menuItem('About', '/admin/about-list')
@@ -48,9 +48,9 @@ block content
                     span(class='text-light') #{data.mobile}
                 p Fax: 
                     span(class='text-light') #{data.fax}
-            div(class='col')
+            div(class='col users-show-col')
                 p
-                  img(src=`/images/avatars/${data.avatar}.jpg`, alt="" class='user-avatar')
+                  img(src=`/images/media/${data.avatar}`, alt="" class='user-show-avatar')
                 button(class='btn btn-primary m-1')
                     +menuItem('Powrót', '/admin/users-list')
                 button(class='btn btn-warning m-1')

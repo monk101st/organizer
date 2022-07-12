@@ -2,10 +2,10 @@ extends ../layout
 
 block content
   div(class='admin-index-bar row m-0')
-    div(class='menu-column col-2 py-3')
+    div(class='menu-column col-2 py-5')
       div(class='user-info-bar') 
         p(class='username-bar') #{userName} #{userSurname}
-          img(src=`/images/avatars/${userAvatar}.jpg`, alt="" class='user-avatar')
+          img(src=`/images/media/${userAvatar}`, alt="" class='user-avatar')
       div(class='buttons-bar p-3')
         button(class='btn btn-primary w-100 my-1')
           +menuItem('About', '/admin/about-list')
@@ -30,11 +30,10 @@ block content
         div(class='row m-0')
             if success
                 div(class="alert alert-success alert-dismissible")
-                    a(href="/admin/media-list" class="close" data-dismiss="alert" aria-label="close") &times
-                    strong Success! Your Image File is Uploaded.
+                    a(href="/admin/media-list" class="close" data-dismiss="alert" aria-label="close") 
+                    strong Plik został dodany. &times
             else
                 div(class='col')
-
                     form( action='/admin/media/update' method='post' enctype='multipart/form-data')
                         div(class='mb-3')
                             label(class='form-label mx-2') ID:
@@ -44,12 +43,10 @@ block content
                             input(type='text' name='title' class='form-control' value=data.title || '' )
                         div(class='mb-3')
                             label(class='form-label mx-2') Nazwa galerii:
-                            <select class="form-select" aria-label="Default select example" name='gallery'>
-                                <option selected>Wybierz galerię...</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                            </select>
+                            select(class="form-select" aria-label="Default select example" name='gallery')
+                              option(selected) Wybierz galerię...
+                              each item in galdata
+                               option(value=`${item.title}`)=item.title
                         div(class='mb-3')
                             label(class='form-label mx-2') Autor:
                             input(type='text' name='author' class='form-control' value=data.author || '' )

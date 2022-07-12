@@ -1,27 +1,22 @@
 extends layout
 
 block content
-  div(class='about-bar')
-    section(class="about-top p-5")
-      div(class='row  row-cols-md-1 row-cols-lg-2')
-        div(class='about-column  py-3')
-          div(class='about-card-img')
-            img(src="/images/about-card-1.jpg", alt="")
-            h3 Czym się zajmuję1
-          p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident modi dolorum eligendi repudiandae delectus maxime exercitationem dolore voluptatem saepe, corporis nihil doloribus illo dicta, praesentium iure! Asperiores reprehenderit, dolores rerum quae quibusdam, quis perspiciatis labore adipisci autem voluptate assumenda culpa repudiandae fugiat in magni dicta ipsum consectetur aliquid? Magni, aperiam.
-        div(class='about-column py-3')
-          div(class='about-card-img')
-            img(src="/images/about-card-2.jpg", alt="")
-            h3 Czym się zajmuję1
-          p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident modi dolorum eligendi repudiandae delectus maxime exercitationem dolore voluptatem saepe, corporis nihil doloribus illo dicta, praesentium iure! Asperiores reprehenderit, dolores rerum quae quibusdam, quis perspiciatis labore adipisci autem voluptate assumenda culpa repudiandae fugiat in magni dicta ipsum consectetur aliquid? Magni, aperiam.
-        div(class='about-column py-3')
-          div(class='about-card-img')
-            img(src="/images/about-card-3.jpg", alt="")
-            h3 Czym się zajmuję1
-          p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident modi dolorum eligendi repudiandae delectus maxime exercitationem dolore voluptatem saepe, corporis nihil doloribus illo dicta, praesentium iure! Asperiores reprehenderit, dolores rerum quae quibusdam, quis perspiciatis labore adipisci autem voluptate assumenda culpa repudiandae fugiat in magni dicta ipsum consectetur aliquid? Magni, aperiam.
-        div(class='about-column py-3')
-          div(class='about-card-img')
-            img(src="/images/about-card-4.jpg", alt="")
-            h3 Czym się zajmuję1
-          p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident modi dolorum eligendi repudiandae delectus maxime exercitationem dolore voluptatem saepe, corporis nihil doloribus illo dicta, praesentium iure! Asperiores reprehenderit, dolores rerum quae quibusdam, quis perspiciatis labore adipisci autem voluptate assumenda culpa repudiandae fugiat in magni dicta ipsum consectetur aliquid? Magni, aperiam.
-        
+  div(class='news-bar')
+    div(class='search-bar px-5')  
+      form(method='get')
+        input(type="text" class="form-control" name='search' value= search id="exampleFormControlInput1" placeholder="wpisz wyszukiwane słowo...")
+        button(class='btn btn-primary' type='submit') Szukaj
+    div(class='row  row-cols-1 row-cols-md-1 row-cols-lg-3 p-5')
+       each item in data 
+         div(class='col p-3')
+           div(class='news-card card p-3 my-2 h-100')
+             div(class='card-header-bar') 
+               p #{item.created.getFullYear()}:#{item.created.getMonth() + 1}:#{item.created.getDate()}
+               span Liczba odsłon: #{item.counter}
+             img(src=`/images/media/${item.picture}`, alt="" class='news-card-img')
+             div(class='card-body')
+               h5(class='card-title')=item.title
+               p(class='card-text')=item.description
+               p(class='card-author')=item.author
+             div(class='card-footer-bar')
+               a(href=`/about/show/${item._id}` class='btn btn-primary') więcej...

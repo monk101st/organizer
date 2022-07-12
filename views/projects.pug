@@ -1,7 +1,22 @@
 extends layout
 
 block content
-  div(class='projects-bar')
-    h1= title
-    p Welcome to #{title}
-    span=path
+  div(class='news-bar')
+    div(class='search-bar px-5')  
+      form(method='get')
+        input(type="text" class="form-control" name='search' value= search id="exampleFormControlInput1" placeholder="wpisz wyszukiwane słowo...")
+        button(class='btn btn-primary' type='submit') Szukaj
+    div(class='row  row-cols-1 row-cols-md-1 row-cols-lg-3 p-5')
+       each item in data 
+         div(class='col p-3')
+           div(class='news-card card p-3 my-2 h-100')
+             div(class='card-header-bar') 
+               p #{item.created.getFullYear()}:#{item.created.getMonth() + 1}:#{item.created.getDate()}
+               span Liczba odsłon: #{item.counter}
+             img(src=`/images/media/${item.picture}`, alt="" class='news-card-img')
+             div(class='card-body')
+               h5(class='card-title')=item.title
+               p(class='card-text')=item.description
+               p(class='card-author')=item.author
+             div(class='card-footer-bar')
+               a(href=`/projects/show/${item._id}` class='btn btn-primary') więcej...

@@ -1,13 +1,11 @@
 extends ../layout
 
-
-
 block content
   div(class='admin-index-bar row m-0')
-    div(class='menu-column col-2 py-3')
+    div(class='menu-column col-2 py-5')
       div(class='user-info-bar') 
         p(class='username-bar') #{userName} #{userSurname}
-          img(src=`/images/avatars/${userAvatar}.jpg`, alt="" class='user-avatar')
+          img(src=`/images/media/${userAvatar}`, alt="" class='user-avatar')
       div(class='buttons-bar p-3')
         button(class='btn btn-primary w-100 my-1')
           +menuItem('About', '/admin/about-list')
@@ -35,22 +33,16 @@ block content
           a(href="/admin/gallerys-list")
             button(class='btn btn-warning me-1') Galerie
         div(class='search-media col-4')
-          div(class="input-group mb-3")
-            input(type="text" class="form-control m-0" placeholder="Wpisz nazwę pliku...")
-            button(class='btn btn-primary') Szukaj
+            form(method='get')
+              input(type="text" class="form-control m-0" name='search' value=search  id="exampleFormControlInput1" placeholder="Wpisz wyszukiwaną frazę...")
+              button(class='btn btn-primary ms-1' type='submit') Szukaj
         div(class='title-media col-4')
           h3(class='title-admin-page') #{title}
       div(class='media-list-bar')
         each item in data
           div(class='media-detail-bar')
-            div(class='media-detail-header')
-              p #{item.date.getFullYear()}:#{item.date.getMonth() + 1}:#{item.date.getDate()}
-            div(class='media-detail-image')
+            button(type='button' class='media-show-btn border-0' data-bs-toggle="modal" data-bs-target=`#set${item._id}`) 
               img(src=`/images/media/${item.filename}`, alt="")
-            div(class='media-detail-body py-1')
-            div(class='media-button-bar')
-                  button(type='button' class='media-show-btn btn btn-primary p-1' data-bs-toggle="modal" data-bs-target=`#set${item._id}`) więcej... 
-
           div(class="modal fade" id=`set${item._id}` tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true")
             div(class="modal-dialog modal-dialog-centered")
               div(class="modal-content")
@@ -59,7 +51,10 @@ block content
                   button(type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close")
                 div(class="modal-body")
                   img(src=`/images/media/${item.filename}`, alt="")
-                  p(class='py-2')=item.description
+                  p(class='p-description py-2')=item.description
+                  p(class='p-add-date py-2') Data dodania: #{item.date.getFullYear()}:#{item.date.getMonth() + 1}:#{item.date.getDate()}
+                  p(class='p-author py-2') Autor: #{item.author}
+                  p(class='p-author py-2') Galeria: #{item.gallery}
                 div(class="modal-footer")
                   button(type="button" class="btn btn-secondary" data-bs-dismiss="modal") Zamknij
                   a(href=`media/edit/${item._id}`) 

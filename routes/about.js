@@ -23,7 +23,7 @@ router.get('/show/:id', (req, res, next) => {
 
     Abouts.findByIdAndUpdate(data.id, {counter: dataCounter}, (err) => {
       
-      res.render('news-show', { 
+      res.render('about-show', { 
         data,
       });
       console.log(data.counter);

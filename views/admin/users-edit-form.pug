@@ -2,10 +2,10 @@ extends ../layout
 
 block content
   div(class='admin-index-bar row m-0')
-    div(class='menu-column col-2 py-3')
+    div(class='menu-column col-2 py-5')
         div(class='user-info-bar') 
           p(class='username-bar') #{userName} #{userSurname}
-            img(src=`/images/avatars/${userAvatar}.jpg`, alt="" class='user-avatar')
+            img(src=`/images/media/${userAvatar}`, alt="" class='user-avatar')
         div(class='buttons-bar p-3')
           button(class='btn btn-primary w-100 my-1')
             +menuItem('About', '/admin/about-list')
@@ -26,7 +26,7 @@ block content
       if errors.errors !== undefined 
           each message in errors.errors 
             p(class='validation-alert')=message
-      form(action='/admin/users/update' method='post')
+      form(action='/admin/users/update' method='post' enctype='multipart/form-data')
         div(class='row m-0')
           div(class='col')
             div(class='mb-3')
@@ -48,8 +48,11 @@ block content
               label(class='form-label mx-2') Password:
               input(type='password' name='password' class='form-control' value=data.password || '' )
             div(class='mb-3')
-              label(class='form-label mx-2') Avatar:
-              input(type='text' name='avatar' class='form-control' value=data.avatar || '' )
+              label(class='form-label mx-2') Old File:
+              input(type='text' name='oldpicture' class='form-control' value=data.avatar || '' )
+            div(class='mb-3')
+              label(for="formFile" class="form-label") Obraz avatar:
+              input(class="form-control" type="file" id="formFile" name="image") 
           div(class='col')
             div(class='mb-3')
               label(class='form-label mx-2') Adres:
@@ -69,6 +72,8 @@ block content
             div(class='mb-3')
               label(class='form-label mx-2') Fax:
               input(type='text' name='fax' class='form-control' value=data.fax || '' )
+            a(href="/admin/users-list")
+              button(class='btn btn-block btn-secondary mx-1' type='button') Anuluj
             button(type='submit' class='btn btn-primary') Zapisz
 
 

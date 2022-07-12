@@ -2,10 +2,10 @@ extends ../layout
 
 block content
   div(class='admin-index-bar row m-0')
-    div(class='menu-column col-2 py-3')
+    div(class='menu-column col-2 py-5')
       div(class='user-info-bar') 
         p(class='username-bar') #{userName} #{userSurname}
-          img(src=`/images/avatars/${userAvatar}.jpg`, alt="" class='user-avatar')
+          img(src=`/images/media/${userAvatar}`, alt="" class='user-avatar')
       div(class='buttons-bar p-3')
         button(class='btn btn-primary w-100 my-1')
           +menuItem('About', '/admin/about-list')
@@ -26,15 +26,55 @@ block content
         if errors.errors !== undefined 
           each message in errors.errors 
               p(class='validation-alert')=message
-              
-        form(method='post')
-          div(class='mb-3')
-              label(class='form-label mx-2') Tytuł:
-              input(type='text' name='title' class='form-control' value=body.title || '' )
-          div(class='mb-3')
-              label(class='form-label mx-2') Autor:
-              input(type='text' name='author' class='form-control' value=body.author || '' )
-          div(class='mb-3')
-              label(class='form-label mx-2') Treść:
-              textarea(class='form-control' type='text' name='description' rows='5')=body.description || ''
-          button(type='submit' class='btn btn-primary') Dodaj
+        div(class='row m-0')
+          if success
+            div(class="alert alert-success alert-dismissible")
+                a(href="/admin/media-list" class="close" data-dismiss="alert" aria-label="close") &times
+                strong Success! Your Image File is Uploaded.
+          else
+          div(class='col')
+            form(method='post' enctype='multipart/form-data')
+              div(class='mb-3')
+                  label(class='form-label mx-2') Tytuł:
+                  input(type='text' name='title' class='form-control' value=body.title || '' )
+              div(class='mb-3')
+                  label(class='form-label mx-2') Autor:
+                  input(type='text' name='author' class='form-control' value=body.author || '' )
+              div(class='mb-3')
+                  <label for="formFile" class="form-label">Obrazek:</label>
+                  <input class="form-control" type="file" id="formFile" name="image">
+              div(class='mb-3 py-3') 
+                  p Wykorzystane technologie:
+                  div(class='row m-0 border border-primary py-5')
+                    div(class='col')
+                      div(class="form-check form-switch")
+                        input(class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" name='javascript' value=' JavaScript')
+                        label(class="form-check-label  text-light" for="flexSwitchCheckDefault") JavaScript
+                      div(class="form-check form-switch")
+                        input(class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" name='react' value=' React')
+                        label(class="form-check-label  text-light" for="flexSwitchCheckDefault") React
+                    div(class='col')
+                      div(class="form-check form-switch")
+                        input(class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" name="css" value=' CSS')
+                        label(class="form-check-label  text-light" for="flexSwitchCheckDefault") CSS
+                      div(class="form-check form-switch")
+                        input(class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" name='bootstrap' value=' Bootstrap')
+                        label(class="form-check-label  text-light" for="flexSwitchCheckDefault") Bootstrap
+                    div(class='col')
+                      div(class="form-check form-switch")
+                        input(class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" name='html' value=' HTML')
+                        label(class="form-check-label  text-light" for="flexSwitchCheckDefault") HTML
+                      div(class="form-check form-switch")
+                        input(class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" name='jquerry' value=' jQuerry')
+                        label(class="form-check-label  text-light" for="flexSwitchCheckDefault") jQuerry
+              div(class='mb-3')
+                  label(class='form-label mx-2') Treść:
+                  textarea(class='form-control' type='text' name='description' rows='5')=body.description || ''
+              div(class='mb-3')
+                  label(class='form-label mx-2') Treść artykułu:
+                  textarea(class='form-control' type='text' name='articleText' rows='5')=body.articleText || ''
+              a(href="/admin/project-list")
+                  button(class='btn btn-block btn-secondary mx-1' type='button') Anuluj
+              button(type='submit' class='btn btn-primary') Zapisz
+          div(class='col')
+            p informacje o projects

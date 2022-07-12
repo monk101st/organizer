@@ -2,10 +2,10 @@ extends ../layout
 
 block content
   div(class='admin-index-bar row m-0')
-    div(class='menu-column col-2 py-3')
+    div(class='menu-column col-2 py-5')
       div(class='user-info-bar') 
         p(class='username-bar') #{userName} #{userSurname}
-          img(src=`/images/avatars/${userAvatar}.jpg`, alt="" class='user-avatar')
+          img(src=`/images/media/${userAvatar}`, alt="" class='user-avatar')
       div(class='buttons-bar p-3')
         button(class='btn btn-primary w-100 my-1')
           +menuItem('About', '/admin/about-list')
@@ -29,6 +29,7 @@ block content
                     span(class='text-light') #{data.title}
                 p Autor: 
                     span(class='text-light') #{data.author}
+                img(src=`/images/media/${data.picture}`, alt="" style='width: 100%')
             div(class='col')
                 div Wstęp: 
                     p(class='text-light') #{data.description}
